@@ -1,0 +1,17 @@
+.hidden, .active{
+	background: navy;
+	color: darkorange;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	transition: 0.3s ease;
+	width: 50%;
+	height: 100%;
+	padding: 0 0 0 1em;
+}
+.hidden{
+	left: -50%;
+}
+.active{
+	left: 0;
+}

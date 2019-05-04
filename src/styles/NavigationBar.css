@@ -1,0 +1,28 @@
+header.navigation{
+	display: block;
+	overflow-x: auto;
+}
+h1.activeNav,h1.passiveNav{
+	text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 325%;
+	padding: 1%;
+	margin: 0 1vw;
+	max-width: 40vw;
+	min-width: 20vw;
+	display: inline;
+	opacity: 0.909;
+	color: darkorange;
+	transition: 150ms linear;
+	cursor: pointer;
+	user-select: none;
+}
+h1.activeNav{
+	/*text-shadow: 4px 3px 7px #0000006b;*/
+	text-shadow: 4px 3px 3px #0049ff, 2px -1px 3px #00ff02;
+	letter-spacing: 1pt;
+	opacity: 1;
+}
+section{
+	padding: 2em;
+}
