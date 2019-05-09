@@ -1,35 +1,47 @@
 import React from 'react'
-import {Component,ReactNode} from 'react'
-import {PropType,StateType,PageType} from './types/NavigationBar'
+import {PropType,PageType} from './types/NavigationBar'
 import '../styles/NavigationBar.css'
-export default class NavigationBar extends Component<PropType,StateType>{
-	static state: StateType={}
-	constructor(props: PropType){
-		super(props)
-		this.state=props.pages
+import clamp from 'lodash-es/clamp'
+import {useSprings,animated} from 'react-spring'
+import {useGesture} from 'react-with-gesture'
+const NavigationBar: React.FC<PropType>=(props: PropType)=>{
+	const ForeignComponent=props.pages[props.highlight].component
+	const [springs, set] = useSprings(props.pages.length, i => ({ x: i * window.innerWidth, sc: 1, display: 'block' }))
+  const bind = useGesture(({ down, delta: [xDelta], direction: [xDir], distance, cancel }) => {
+	if (down && distance > window.innerWidth / 2){
+		const clampVar = clamp(props.highlight + (xDir > 0 ? -1 : 1), 0, props.pages.length - 1)
+		props.highlightHandler(clampVar)
+		if(cancel)
+			cancel()
 	}
-	render(): ReactNode{
-		const ForeignComponent=this.props.pages[this.props.highlight].component
-		console.log(ForeignComponent)
-		return (
-			<>
-			<header className={'navigation'}>
-				{this.props.pages.map((page:PageType,id: number)=>(
-					id!==this.props.highlight?
-					<h1
-						className={'passiveNav'}
-						key={id}
-						onClick={()=>this.props.highlightHandler(id)}
-					>
-						{page.name}
-					</h1>:
-					<h1 className={'activeNav'} key={id}>{page.name}</h1>
-				))}
-			</header>
-			<section>
-				{ForeignComponent}
-			</section>
-			</>
-		)
-	}
+    set(1/*(i: number) => {
+	  if (i < props.highlight - 1 || i > props.highlight + 1)
+	  	return { display: 'none' }
+      const x = (i - props.highlight) * window.innerWidth + (down ? xDelta : 0)
+      const sc = down ? 1 - distance / window.innerWidth / 2 : 1
+      return { x, sc, display: 'block' }
+    }*/)
+  })
+	return (
+		<>
+		<header className={'navigation'}>
+			{props.pages.map((page:PageType,id: number)=>(
+				id!==props.highlight?
+				<h1
+					className={'passiveNav'}
+					key={id}
+					onClick={()=>props.highlightHandler(id)}
+				>
+					{page.name}
+				</h1>:
+				<h1 className={'activeNav'} key={id}>{page.name}</h1>
+			))}
+		</header>
+		<section>
+			{ForeignComponent}
+		</section>
+		</>
+	)
 }
+
+export default NavigationBar

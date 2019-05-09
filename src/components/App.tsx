@@ -3,7 +3,8 @@ import {useState} from 'react'
 import {FunComp} from './types/App'
 import '../styles/App.css'
 import NavigationBar from './NavigationBar'
-import SideBar from './SideBar';
+import SideBar from './SideBar'
+import {PageType} from './types/NavigationBar'
 const LoremIpsum: React.FC<{title?: string}>=({title="Lorem Ipsum"})=>{
 	return (<>
 		<h1>{title}</h1>
@@ -20,17 +21,22 @@ Ornare aenean euismod elementum nisi quis. Pellentesque habitant morbi tristique
 		</p>
 	</>)
 }
+const pagesMap: PageType[]=[
+	{name: "Timed",component: <LoremIpsum title={'Timed'}/>},
+	{name: "Dashboard",component: <LoremIpsum title={'Dashboard'}/>},
+	{name: 'Communities',component: <LoremIpsum title={'Communities'}/>},
+	{name: 'Profile',component: <LoremIpsum title={'Profile'}/>},
+]
 const App: FunComp = () => {
 	const [showSideBar,SideBarToggle]=useState(false)
 	const [pageToHighlight,Highlighter]=useState(0)
   return (
 	  <>
-    <NavigationBar pages={[
-		{name: "Timed",component: <LoremIpsum title={'Timed'}/>},
-		{name: "Dashboard",component: <LoremIpsum title={'Dashboard'}/>},
-		{name: 'Communities',component: <LoremIpsum title={'Communities'}/>},
-		{name: 'Profile',component: <LoremIpsum title={'Profile'}/>},
-	]} highlight={pageToHighlight} highlightHandler={Highlighter}/>
+	<NavigationBar
+		pages={pagesMap}
+		highlight={pageToHighlight}
+		highlightHandler={Highlighter}
+	/>
 	<SideBar showSideBar={showSideBar} SideBarHandler={SideBarToggle} />
 	</>
   )
