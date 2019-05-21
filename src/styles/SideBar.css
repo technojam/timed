@@ -1,17 +1,86 @@
-.hidden, .active{
-	background: navy;
-	color: darkorange;
+.hidden,.hidden-dark,.active,.active-dark{
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	transition: 0.3s ease;
-	width: 50%;
+	width: 100%;
 	height: 100%;
-	padding: 0 0 0 1em;
+	padding: 0;
+	margin: 0;
 }
-.hidden{
-	left: -50%;
+.hidden-dark,.active-dark{
+	background: #000;
+	color: #9ea8ab;
 }
-.active{
+.hidden-dark,.hidden{
+	left: -120%;
+}
+.active-dark,.active{
 	left: 0;
+}
+.hidden,.active{
+	background: #fff;
+	color: #536367;
+}
+.menuButton,.menuButton-dark{
+	display: block;
+	position: fixed;
+	top: .5em;
+	height: 1.2em;
+	width: 1.2em;
+	padding: 1em;
+	content: '\2630';
+	left: 1vw;
+	color: darkorange;
+	border-radius: 100%;
+	transition: 0.3s ease;
+	user-select: none;
+	cursor: pointer;
+}
+.menuButton-dark{
+	background: navy;
+}
+.menuButton{
+	background: #03a9f4;
+}
+.menuButton-dark:before,.menuButton:before{
+	content: '\2630';
+	position: fixed;
+	top: .5em;
+	font-size: large;
+	user-select: none;
+	cursor: pointer;
+	padding-top: .65em;
+}
+.menuButton-dark:before{
+	text-shadow: 4px 3px 3px #0049ff, 2px -1px 3px #00ff02;
+}
+.menuButton:before{
+	text-shadow: 3px 3px 0px #000000c7;
+}
+.sidebarTitle,.sidebarTitle-dark{
+	font-size: 325%;
+	font-family: 'IBM Plex Mono', monospace;
+	height: 59px;
+	margin: 0;
+	color: darkorange;
+	text-align: center;
+}
+.sidebarTitle-dark{
+	text-shadow: 4px 3px 3px #0049ff, 2px -1px 3px #00ff02;
+}
+.sidebarTitle{
+	text-shadow: 2px 6px 0 #3da9f4c4;
+}
+.sidebar-content,.sidebar-content-dark{
+	padding: 1em;
+	max-height: calc(100% - 59px - 2em);
+	width: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
+	margin-top: 1em;
+}
+.right:before,.right-dark:before{
+	content: '\2715';
+	padding-left: .175em;
 }

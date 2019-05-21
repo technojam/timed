@@ -4,7 +4,6 @@ export interface SideBarPropType{
 	children?: React.ReactNode[],
 	showSideBar?: Boolean,
 	themeName?: String,
-	isDark: Boolean,
-	//themeToggler?: Boolean,
-	themeToggler: React.Dispatch<React.SetStateAction<boolean>>,
+	isDark?: Boolean,
+	themeToggler?: React.Dispatch<SetState<Boolean>>,
 }

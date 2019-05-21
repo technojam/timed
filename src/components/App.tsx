@@ -30,14 +30,16 @@ const pagesMap: PageType[]=[
 const App: FunComp = () => {
 	const [showSideBar,SideBarToggle]=useState(false)
 	const [pageToHighlight,Highlighter]=useState(0)
+	const [theme,themeSwitcher]=useState(false)
   return (
 	  <>
 	<NavigationBar
 		pages={pagesMap}
 		highlight={pageToHighlight}
 		highlightHandler={Highlighter}
+		isDark={theme}
 	/>
-	<SideBar showSideBar={showSideBar} SideBarHandler={SideBarToggle} />
+	<SideBar showSideBar={showSideBar} SideBarHandler={SideBarToggle} isDark={theme} themeToggler={themeSwitcher}/>
 	</>
   )
 }

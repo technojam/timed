@@ -4,6 +4,8 @@ import '../styles/NavigationBar.css'
 import clamp from 'lodash-es/clamp'
 import {useSprings,animated} from 'react-spring'
 import {useGesture} from 'react-with-gesture'
+import themeVariant from '../utils/pretty'
+
 const NavigationBar: React.FC<PropType>=(props: PropType)=>{
 	const ForeignComponent=props.pages[props.highlight].component
 	const [springs, set] = useSprings(props.pages.length, i => ({ x: i * window.innerWidth, sc: 1, display: 'block' }))
@@ -24,20 +26,20 @@ const NavigationBar: React.FC<PropType>=(props: PropType)=>{
   })
 	return (
 		<>
-		<header className={'navigation'}>
+		<header className={themeVariant('navigation',props.isDark)}>
 			{props.pages.map((page:PageType,id: number)=>(
 				id!==props.highlight?
 				<h1
-					className={'passiveNav'}
+					className={themeVariant('passiveNav',props.isDark)}
 					key={id}
 					onClick={()=>props.highlightHandler(id)}
 				>
 					{page.name}
 				</h1>:
-				<h1 className={'activeNav'} key={id}>{page.name}</h1>
+				<h1 className={themeVariant('activeNav',props.isDark)} key={id}>{page.name}</h1>
 			))}
 		</header>
-		<section>
+		<section className={themeVariant('theme',props.isDark)}>
 			{ForeignComponent}
 		</section>
 		</>
